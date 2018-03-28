@@ -58,19 +58,6 @@ const determineHand = (hand) => {
         return cardFrequencies.includes(3);
     };
 
-    const isFullHouse = (values) => {
-        let cardValues = [];
-        let cardFrequencies = [];
-        values.forEach((value) => {
-            if(!cardValues.includes(value)) {
-                cardValues.push(value);
-                cardFrequencies.push(1);
-            } else {
-                cardFrequencies[cardValues.indexOf(value)] = cardFrequencies[cardValues.indexOf(value)]+1;
-            }
-        });
-        return cardFrequencies.includes(3 & 2);
-    };
     
     const hasPair = (values) => {
         let cardValues = [];
@@ -85,8 +72,9 @@ const determineHand = (hand) => {
         });
         return cardFrequencies.includes(2 && !3);
     };
-
-
+    
+    const isFullHouse = hasPair && hasThreeOfaKind;
+    
 
     const isStraight = (values)=>{
         values.sort(function (a, b){
