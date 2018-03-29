@@ -14,15 +14,15 @@ const determineHand = (hand) => {
     const numericCardValues = (values) => {
         return values.map((value) => {
             if (value === 'J') {
-                return '11';
+                return parseInt('11'); 
             } else if (value === 'Q') {
-                return '12';
+                return parseInt('12');
             } else if (value === 'K') {
-                return '13';
+                return parseInt('13');
             } else if (value === 'A') {
-                return '14';
+                return parseInt('14');
             }
-            return value;
+            return parseInt(value);
         });
     };
     
@@ -59,7 +59,7 @@ const determineHand = (hand) => {
     };
 
     
-    const hasPair = (values) => {
+    const hasOnePair = (values) => {
         let cardValues = [];
         let cardFrequencies = [];
         values.forEach((value) => {
@@ -72,20 +72,29 @@ const determineHand = (hand) => {
         });
         return cardFrequencies.includes(2 && !3);
     };
+
+    const hasTwoPair = (values) => {
+        let cardValues = [];
+        let cardFrequencies = [];
+        values.forEach((value) => {
+            if(!cardValues.includes(value)) {
+                cardValues.push(value);
+                cardFrequencies.push(1);
+            } else {
+                cardFrequencies[cardValues.indexOf(value)] = cardFrequencies[cardValues.indexOf(value)]+1;
+            }
+        });
+        return cardFrequencies.includes(2, 2);
+    };
     
     const isFullHouse = hasPair && hasThreeOfaKind;
     
 
     const isStraight = (values)=>{
-        values.sort(function (a, b){
-            return a - b;
-            if(values[4] - values[0] === 4) {
-                return true
-            } else {
-                return false
-            }
-        });
-    };
+        values.sort(function(a,b){return a-b})
+        let unique = Array.from(new Set(values))
+        unique.length === 5 && unique[unique.length-1] - unique[0] === 4
+    }
 
     const isStraightFlush = isFlush() && isStraight();
 
