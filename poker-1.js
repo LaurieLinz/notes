@@ -55,7 +55,7 @@ const determineHand = (hand) => {
                 cardFrequencies[cardValues.indexOf(value)] = cardFrequencies[cardValues.indexOf(value)]+1;
             }
         });
-        return cardFrequencies.includes(3);
+        return cardFrequencies.includes(3 && !2);
     };
 
     
